@@ -6,15 +6,15 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.ui import Button, View
 
-client = commands.Bot(command_prefix='', help_command=None, intents=discord.Intents.all())
+client = commands.Bot(command_prefix='n.', help_command=None, intents=discord.Intents.all())
 
 
 @client.event
 async def on_ready():
-    for module in os.listdir('modules'):
+    for module in os.listdir('discord/modules'):
         if module.endswith('.py') and not module == 'main.py':
             await client.load_extension(f'modules.{module[:-3]}')
-            print(f'{module} loaded up.')
+            print(f'"{module}" loaded up.')
     
     await client.tree.sync()
     print("Neiro is up and running.")
