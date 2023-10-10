@@ -24,7 +24,7 @@ def chat(message):
 def do_openai(message):
     print('creating request')
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model=g4f.models.gpt_4
         messages=[{"role": "user", "content": message}]
         stream = True
     )
