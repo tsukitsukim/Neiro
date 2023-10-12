@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    float: inherit;
+    width: auto;
+    font-family: 'Cascadia Code SemiBold';
+    font-weight: 500;
+    color: azure;
+}
+
+body {
+    background: #303030;
+}
+
+actionbar {
+    background: #212121;
+    width: auto;
+    height: 100%;
+    padding-top: 5%;
+    padding-left: 5%;
+}
