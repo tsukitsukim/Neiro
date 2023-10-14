@@ -8,15 +8,37 @@
     font-weight: 500;
     color: azure;
 }
-
 body {
-    background: #303030;
+    background: #252525;
 }
-
-actionbar {
+a {
+    color: azure;
+}
+.actionbar {
+    position: relative;
+    border: 2px solid #830fd2;
+    border-radius: 20px;
+    margin: 2% auto;
     background: #212121;
-    width: auto;
-    height: 100%;
-    padding-top: 5%;
-    padding-left: 5%;
+    width: 90%;
+    height: 10%;
+}
+.actionbar #logo {
+    padding-left: 4%;
+}
+.actionbar a {
+    margin: 2% 2% auto;
+    float: right;
+    text-decoration: none;
+    text-shadow: 2px 2px #830fd2;
+}
+.actionbar a:hover {
+    color: azure;
+}
+main {
+
+}
+.introduction {
+    margin: 2% auto;
+    height: 30%;
 }

@@ -4,13 +4,17 @@
 {% block title %}Neiro{% endblock %}
 
 {% block actionbar %}
-    <header id="actionbar">
-        <img src="{% static 'main/img/Neiro.png' %}" alt="Neiro" width="75px" height="75px">
+    <header class="actionbar">
+        <img id="logo" src="{% static 'main/img/Neiro.png' %}" alt="Neiro" width="75px" height="75px">
+        <a href="">Dashboard</a>
+        <a href="">FAQ</a>
+        <a href="">Support</a>
+        <a href="">News</a>
     </header>
 {% endblock %}
 
 {% block content %}
-    <h1>hi</h1>
-
-
+    <div class="introduction">
+        <img id="logo_full" src="{% static 'main/img/Neiro_full.png' %}" alt="Neiro" width="200px" height="100px">
+    </div>
 {% endblock %}
