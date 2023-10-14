@@ -15,6 +15,12 @@
 
 {% block content %}
     <div class="introduction">
-        <img id="logo_full" src="{% static 'main/img/Neiro_full.png' %}" alt="Neiro" width="200px" height="100px">
+        <img id="logo_full" src="{% static 'main/img/Neiro_full.png' %}" alt="Neiro" width="300px" height="200px">
+        <h4 id="logo_desc">Multifunctional bot&nbsp;<span class="ai_typing"></span></h4>
+        <div class="buttons">
+            <button id="dc_integr"><img src="{% static 'main/img/discord_logo.png' %}" alt="Discord" width="50px" height="50px"> Add to Discord</button>
+            <button id="tg_integr"><img src="{% static 'main/img/telegram_logo.png' %}" alt="Telegram" width="50px" height="50px"> Add to Telegram</button>
+            <button id="vk_integr"><img src="{% static 'main/img/vkontakte_logo.png' %}" alt="VKontakte" width="50px" height="50px"> Add to Vkontakte</button>
+        </div>
     </div>
 {% endblock %}

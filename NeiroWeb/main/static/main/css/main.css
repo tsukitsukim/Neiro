@@ -35,10 +35,115 @@ a {
 .actionbar a:hover {
     color: azure;
 }
-main {
-
-}
 .introduction {
-    margin: 2% auto;
-    height: 30%;
+    position: relative;
+    margin: 2% auto auto 0%;
+}
+.introduction #logo_full {
+    display: block;
+    margin: 5% auto auto;
+}
+@keyframes typing {
+    0% { content: ""; }
+    2% { content: "a"; }
+    4% { content: "an"; }
+    6% { content: "and"; }
+    8% { content: "and "; }
+    10% { content: "and A"; }
+    12% { content: "and Ar"; }
+    14% { content: "and Art"; }
+    16% { content: "and Arti"; }
+    18% { content: "and Artif"; }
+    20% { content: "and Artifi"; }
+    22% { content: "and Artific"; }
+    24% { content: "and Artifici"; }
+    26% { content: "and Artificia"; }
+    28% { content: "and Artificial"; }
+    30% { content: "and Artificial "; }
+    32% { content: "and Artificial I"; }
+    34% { content: "and Artificial In"; }
+    36% { content: "and Artificial Int"; }
+    38% { content: "and Artificial Inte"; }
+    40% { content: "and Artificial Intel"; }
+    42% { content: "and Artificial Intell"; }
+    44% { content: "and Artificial Intelli"; }
+    46% { content: "and Artificial Intellig"; }
+    48% { content: "and Artificial Intellige"; }
+    50% { content: "and Artificial Intelligen"; }
+    52% { content: "and Artificial Intelligenc"; }
+    54% { content: "and Artificial Intelligence"; }
+    70% { content: "and Artificial Intelligence"; }
+    71% { content: "and Artificial Intelligenс"; }
+    72% { content: "and Artificial Intelligen"; }
+    73% { content: "and Artificial Intellige"; }
+    74% { content: "and Artificial Intellig"; }
+    75% { content: "and Artificial Intelli"; }
+    76% { content: "and Artificial Intell"; }
+    77% { content: "and Artificial Intel"; }
+    78% { content: "and Artificial Inte"; }
+    79% { content: "and Artificial Int"; }
+    80% { content: "and Artificial In"; }
+    81% { content: "and Artificial I"; }
+    82% { content: "and Artificial "; }
+    83% { content: "and Artificial"; }
+    84% { content: "and Artificia"; }
+    85% { content: "and Artifici"; }
+    86% { content: "and Artific"; }
+    87% { content: "and Artifi"; }
+    88% { content: "and Artif"; }
+    89% { content: "and Arti"; }
+    90% { content: "and Art"; }
+    91% { content: "and Ar"; }
+    92% { content: "and A"; }
+    93% { content: "and "; }
+    94% { content: "and"; }
+    95% { content: "an"; }
+    96% { content: "a"; }
+    100% { content: ""; }
+}
+@keyframes border_blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.ai_typing {}
+.ai_typing::before {
+    content: "";
+    animation: typing 12s infinite;
+}
+.ai_typing::after {
+    content: "";
+    border-right: 1px solid azure;
+    animation: border_blink 0.75s linear infinite;
+}
+.introduction #logo_desc {
+    display: block;
+    text-align: center;
+    margin: 1% auto auto;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin: 2% auto auto;
+    gap: 20px;
+}
+.buttons #dc_integr {
+    width: 240px;
+    height: 60px;
+    border: 3px solid azure;
+    border-radius: 40px;
+    background: #5865f2;
+}
+.buttons #tg_integr {
+    width: 240px;
+    height: 60px;
+    border: 3px solid azure;
+    border-radius: 40px;
+    background: #0088cc;
+}
+.buttons #vk_integr {
+    width: 240px;
+    height: 60px;
+    border: 3px solid azure;
+    border-radius: 40px;
+    background: #4c75a3;
 }
