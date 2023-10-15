@@ -147,3 +147,18 @@ a {
     border-radius: 40px;
     background: #4c75a3;
 }
+.features {
+    position: relative;
+    border: 2px solid #830fd2;
+    border-radius: 20px;
+    margin: 2% auto;
+    background: #212121;
+    width: 90%;
+    height: 20%;
+}
+.features #ftm {
+    text-align: center;
+    margin: 1% auto auto;
+    text-decoration: none;
+    text-shadow: 3px 3px #830fd2;
+}
