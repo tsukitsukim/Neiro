@@ -41,7 +41,7 @@ a {
 }
 .introduction #logo_full {
     display: block;
-    margin: 5% auto auto;
+    margin: 3% auto auto;
 }
 @keyframes typing {
     0% { content: ""; }
