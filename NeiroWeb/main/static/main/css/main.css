@@ -125,6 +125,12 @@ a {
     justify-content: center;
     margin: 2% auto auto;
     gap: 20px;
+    animation: up_and_down 5s infinite;
+}
+@keyframes up_and_down {
+    0%: {}
+    50%: { down: 100px; }
+    100%: { up: 100px; }
 }
 .buttons #dc_integr {
     width: 240px;

@@ -1,20 +1,138 @@
-import os
-import json
-import discord
+import os, json, discord, queue
 from discord import app_commands
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.ui import Button, View
+import yt_dlp as youtube_dl
+
+youtube_dl.utils.bug_reports_message = lambda: ''
+ytdl_format_options = {
+    'format': 'bestaudio/best',
+    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+    'restrictfilenames': True,
+    'noplaylist': True,
+    'nocheckcertificate': True,
+    'ignoreerrors': False,
+    'logtostderr': False,
+    'quiet': True,
+    'no_warnings': True,
+    'default_search': 'auto',
+    'source_address': '0.0.0.0'
+}
+ffmpeg_options = {
+    'options': '-vn'
+}
+ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
+
+
+class YTDLSource(discord.PCMVolumeTransformer):
+    def __init__(self, source, *, data, volume=1):
+        super().__init__(source, volume)
+        self.data = data
+        self.title = data.get('title')
+        self.duration = data.get('duration')
+        self.url = data.get('url')
+        self.author = data.get('channel')
+        self.views = data.get('view_count')
+        self.like = data.get('like_count')
+        self.dislike = data.get('dislike_count')
+        self.comment = data.get('comment_count')
+
+        if self.like is None:
+            self.like = 'N/A'
+        if self.dislike is None:
+            self.dislike = 'N/A'
+        if self.comment is None:
+            self.comment = 'N/A'
+
+    @classmethod
+    async def from_url(cls, url, *, loop=None, stream=False):
+        loop = loop or asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
+        if 'entries' in data:
+            data = data['entries'][0]
+        filename = data['url'] if stream else ytdl.prepare_filename(data)
+        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 
 class Music(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
+        self.song_queue = queue.Queue()
 
-    @app_commands.command(name='youtube', description='[Music] | Does nothing yet.')
-    async def youtube(self):
-        pass
+    def handle_song_finished(self, error, voice_client):
+        if not self.song_queue.empty():
+            next_song_url = self.song_queue.get()
+            asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_url, voice_client), self.client.loop)
 
+    async def play_next_song(self, url, voice_chn):
+        player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
+        voice_chn.play(player, after=lambda e: self.handle_song_finished(e, voice_chn))
+
+    @app_commands.command(name='youtube', description='[Music] | Plays a youtube video in the URL provided.')
+    async def youtube(self, interaction: discord.Interaction, url: str):
+        await interaction.response.defer(ephemeral=True)
+        voices = interaction.client.voice_clients
+        for voice in voices:
+            if voice.channel == interaction.user.voice.channel:
+                voice_chn = voice
+                break
+        if interaction.user.voice is None:
+            await interaction.followup.send("You aren't in voice channel...")
+        elif voice_chn is not None:
+            await interaction.followup.send('Added to the song queue.')
+            self.song_queue.put(url)
+        else:
+            vc = interaction.user.voice.channel
+            voice_chn = await vc.connect()
+            player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
+            if voice_chn.is_playing() or not self.song_queue.empty():
+                await interaction.followup.send('Added to the song queue.')
+                self.song_queue.put(url)
+            else:
+                voice_chn.play(player, after=lambda e: self.handle_song_finished(e, voice_chn))
+                await interaction.followup.send(f"Now playing: {player.title} by {player.author}.\n\nLength: ~{round(player.duration / 60)} min. \n 👍 {player.like} 👎 {player.dislike} 💬 {player.comment}\n👁{player.views}")
+
+    @app_commands.command(name='queue', description='[Music] | Shows the current queue of songs.')
+    async def queue(self, interaction: discord.Interaction):
+        await interaction.response.defer(ephemeral=True)
+        voices = interaction.client.voice_clients
+        for voice in voices:
+            if voice.channel == interaction.user.voice.channel:
+                voice_chn = voice
+                break
+
+        if interaction.user.voice is None:
+            await interaction.followup.send("You aren't in a voice channel...")
+        else:
+            queue = voice_chn.source.queue
+            # Check if the queue is empty
+            if not queue:
+                await interaction.followup.send("The queue is currently empty.")
+            else:
+                # Generate a formatted list of the queue
+                queue_list = "\n".join(f"{index}. {song.title} by {song.author}" for index, song in enumerate(queue, 1))
+                await interaction.followup.send(f"Current queue:\n\n{queue_list}")
+
+    @app_commands.command(name='volume', description='[Music] | Regulates the sound to a percent (default is 100%).')
+    async def volume(self, interaction: discord.Interaction, percent: int):
+        await interaction.response.defer(ephemeral=True)
+        voices = interaction.client.voice_clients
+        for voice in voices:
+            if voice.channel == interaction.user.voice.channel:
+                voice_chn = voice
+                break
+        if interaction.user.voice is None:
+            await interaction.followup.send("You aren't in voice channel...")
+        else:
+            voice_chn.source.volume = percent / 100
+            await interaction.followup.send(f"Player volume is now set to {percent}")
+
+    @app_commands.command(name='disconnect', description='[Music] | Disconnect bot from the channel.')
+    async def disconnect(self, interaction: discord.Interaction):
+        await interaction.response.defer(ephemeral=True)
+        await interaction.guild.voice_client.disconnect()
+        await interaction.followup.send("Disconnected from the voice channel.")
 
 async def setup(client):
     await client.add_cog(Music(client))
