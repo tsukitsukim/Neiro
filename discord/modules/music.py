@@ -79,7 +79,7 @@ class Music(commands.Cog):
                 break
         if interaction.user.voice is None:
             await interaction.followup.send("You aren't in voice channel...")
-        elif voice_chn is not None:
+        elif voice_chn is not None: #breakpoint
             await interaction.followup.send('Added to the song queue.')
             self.song_queue.put(url)
         else:
