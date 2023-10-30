@@ -12,7 +12,7 @@
         <a href="">Dashboard</a>
         <a href="">FAQ</a>
         <a href="">Support</a>
-        <a href="">News</a>
+        <a href="">↗Forum</a>
     </header>
 {% endblock %}
 
@@ -24,67 +24,17 @@
         <img id="logo_full" src="{% static 'main/img/Neiro_full.png' %}" alt="Neiro" width="300px" height="200px">
         <h4 id="logo_desc">Multifunctional bot&nbsp;<span class="ai_typing"></span></h4>
         <div class="buttons">
-            <button id="dc_integr"><img src="{% static 'main/img/discord_logo.png' %}" alt="Discord" width="50px" height="50px"> Add to Discord</button>
-            <button id="tg_integr"><img src="{% static 'main/img/telegram_logo.png' %}" alt="Telegram" width="50px" height="50px"> Add to Telegram</button>
-            <button id="vk_integr"><img src="{% static 'main/img/vkontakte_logo.png' %}" alt="VKontakte" width="50px" height="50px"> Add to Vkontakte</button>
+            <a id="dc_integr" href="https://discord.com/api/oauth2/authorize?client_id=1018204276855677061&permissions=8&scope=bot"><img src="{% static 'main/img/discord_logo.png' %}" alt="Discord" width="50px" height="50px">Add to Discord</a>
+            <a id="tg_integr" ><img src="{% static 'main/img/telegram_logo.png' %}" alt="Telegram" width="50px" height="50px">Add to Telegram</a>
+            <a id="vk_integr" ><img src="{% static 'main/img/vkontakte_logo.png' %}" alt="VKontakte" width="50px" height="50px">Add to Vkontakte</a>
         </div>
     </div>
 
     <div class="features">
         <h1 id="ftm">Meet all the features of Neiro!</h1>
-        <ul class="feature_list">
-            <li class="item">
-                <img src="">
-                <h1>Moderation</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Music</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Economy</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Artificial Intelligence</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Leveling</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Audit</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Socials</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Anti-raid</h1>
-                <p></p>
-            </li>
-            <li class="item">
-                <img src="">
-                <h1>Customization: ON</h1>
-                <p></p>
-            </li>
-        </ul>
-        <ul class="scroll" aria-hidden>
-            <li class="scrollable"></li>
-            <li class="scrollable"></li>
-            <li class="scrollable"></li>
-            <li class="scrollable"></li>
-            <li class="scrollable"></li>
-        </ul>
+    </div>
+
+    <div class="blog_preview">
+
     </div>
 {% endblock %}

@@ -10,7 +10,7 @@ client = commands.Bot(command_prefix='n.', help_command=None, intents=discord.In
 @client.event
 async def on_ready():
     for module in os.listdir('discord/modules'):
-        if module.endswith('.py') and not module == 'main.py':
+        if module.endswith('.py') and not module == 'forum.py':
             await client.load_extension(f'modules.{module[:-3]}')
             print(f'"{module}" loaded up.')
     

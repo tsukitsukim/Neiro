@@ -72,7 +72,7 @@ class Music(commands.Cog):
                 'title': player.title,
                 'author': player.author
             }
-            self.song_queue.put(song_info)
+            self.song_queue.put(dict(song_info))
 
             voice_chn.play(player, after=lambda e: self.handle_song_finished(e, voice_chn, interaction))
             await interaction.channel.send(
@@ -110,21 +110,27 @@ class Music(commands.Cog):
     @app_commands.command(name='queue', description='[Music] | Shows the current queue of songs.')
     async def queue(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
-        voices = interaction.client.voice_clients
-        voice_chn = next((voice for voice in voices if voice.channel == interaction.user.voice.channel), None)
+        for song in self.song_queue.queue:
+            url = song['url']
+            title = song['title']
+            author = song['author']
 
-        if not voice_chn:
-            await interaction.followup.send("You aren't in a voice channel...")
-            return
+            url_list = [].append(url)
+            title_list = [].append(title)
+            author_list = [].append(author)
 
-        current_queue = list(self.song_queue.queue)
-        if not current_queue:
-            await interaction.followup.send("The queue is currently empty.")
-            return
+        embed = discord.Embed(title="Queue List", colour=discord.Color.from_rgb(131, 15, 210))
+        embed.add_field(name='Title', value="")
+        embed.add_field(name='Author', value="")
+        embed.add_field(name='URL', value="")
+        for i in url_list:
+            for j in title_list:
+                for k in author_list:
+                    embed.add_field(name='', value=i)
+                    embed.add_field(name='', value=j)
+                    embed.add_field(name='', value=k)
 
-        queue_list = "\n".join(
-            f"{index + 1}. {song['title']} by {song['author']}" for index, song in enumerate(current_queue))
-        await interaction.followup.send(f"Current queue:\n\n{queue_list}")
+        await interaction.followup.send(embed=embed)
 
     @app_commands.command(name='volume', description='[Music] | Regulates the sound to a percent (default is 100%).')
     async def volume(self, interaction: discord.Interaction, percent: int):

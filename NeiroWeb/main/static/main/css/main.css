@@ -127,6 +127,9 @@ a {
     gap: 20px;
     animation: up_and_down 5s infinite;
 }
+.buttons a:hover{
+    color: azure;
+}
 @keyframes up_and_down {
     0%: {}
     50%: { down: 100px; }
@@ -138,6 +141,8 @@ a {
     border: 3px solid azure;
     border-radius: 40px;
     background: #5865f2;
+    text-align: center;
+    text-decoration: none;
 }
 .buttons #tg_integr {
     width: 240px;
@@ -145,6 +150,8 @@ a {
     border: 3px solid azure;
     border-radius: 40px;
     background: #0088cc;
+    text-align: center;
+    text-decoration: none;
 }
 .buttons #vk_integr {
     width: 240px;
@@ -152,6 +159,8 @@ a {
     border: 3px solid azure;
     border-radius: 40px;
     background: #4c75a3;
+    text-align: center;
+    text-decoration: none;
 }
 .features {
     position: relative;
@@ -167,4 +176,12 @@ a {
     margin: 1% auto auto;
     text-decoration: none;
     text-shadow: 3px 3px #830fd2;
+}
+.blog_preview {
+    position: relative;
+    border: 2px solid #830fd2;
+    border-radius: 20px;
+    margin: 2% auto;
+    background: #212121;
+    width: 90%;
 }
