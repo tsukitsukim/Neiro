@@ -1,57 +1,91 @@
+// Script made with ChatGPT by OpenAI
 document.addEventListener("DOMContentLoaded", function() {
+    // Get the triangles container element by ID
     const trianglesContainer = document.getElementById('triangles');
+    // Calculate the center of the screen
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
 
+    // Function to animate the triangles
     function animateTriangles() {
-        // Очищаем контейнер от старых треугольников
-        // trianglesContainer.innerHTML = '';
-
         for (let i = 0; i < 30; i++) {
             const triangle = document.createElement('div');
             triangle.classList.add('triangle');
 
-            let endXPosition;
-
-            if (Math.random() < 0.5) {
-                triangle.style.left = `${window.innerWidth + 60}px`;
-                triangle.style.top = `${Math.random() * window.innerHeight}px`;
-                endXPosition = -60; // треугольник должен исчезнуть за левым краем
-            }
-            else {
-                triangle.style.left = '-60px';
-                triangle.style.top = `${Math.random() * window.innerHeight}px`;
-                endXPosition = window.innerWidth + 60; // треугольник должен исчезнуть за правым краем
-            }
-
-            const endYPosition = parseFloat(triangle.style.top) + (Math.random() - 0.5) * 1000;
-
+            let startX, startY;
+            // Determine the color of the triangle
             const color = i % 2 === 0 ? '#830fd2' : 'white';
-            triangle.style.borderLeft = '20px solid transparent';
-            triangle.style.borderRight = '20px solid transparent';
-            triangle.style.borderBottom = `35px solid ${color}`;
 
+            if (Math.random() < 0.25) {
+                // Small triangles start from the left
+                startX = -60;
+                startY = Math.random() * window.innerHeight;
+                triangle.style.left = `${startX}px`;
+                triangle.style.top = `${startY}px`;
+                triangle.style.borderLeft = '10px solid transparent'; // Smaller size
+                triangle.style.borderRight = '10px solid transparent'; // Smaller size
+                triangle.style.borderBottom = `17.5px solid ${color}`; // Smaller size
+            } else if (Math.random() >= 0.25 && Math.random() < 0.5) {
+                // Small triangles start from the right
+                startX = window.innerWidth + 60;
+                startY = Math.random() * window.innerHeight;
+                triangle.style.left = `${startX}px`;
+                triangle.style.top = `${startY}px`;
+                triangle.style.borderLeft = '10px solid transparent'; // Smaller size
+                triangle.style.borderRight = '10px solid transparent'; // Smaller size
+                triangle.style.borderBottom = `17.5px solid ${color}`; // Smaller size
+            } else if (Math.random() >= 0.5 && Math.random() < 0.75) {
+                // Triangles start from the left
+                startX = -60;
+                startY = Math.random() * window.innerHeight;
+                triangle.style.left = `${startX}px`;
+                triangle.style.top = `${startY}px`;
+                triangle.style.borderLeft = '20px solid transparent'; // Original size
+                triangle.style.borderRight = '20px solid transparent'; // Original size
+                triangle.style.borderBottom = `35px solid ${color}`; // Original size
+            } else {
+                // Triangles start from the right
+                startX = window.innerWidth + 60;
+                startY = Math.random() * window.innerHeight;
+                triangle.style.left = `${startX}px`;
+                triangle.style.top = `${startY}px`;
+                triangle.style.borderLeft = '20px solid transparent'; // Original size
+                triangle.style.borderRight = '20px solid transparent'; // Original size
+                triangle.style.borderBottom = `35px solid ${color}`; // Original size
+            }
+
+            // Append the triangle to the container
             trianglesContainer.appendChild(triangle);
 
-            const duration = 5 + Math.random() * 7;
+            // Calculate the duration of the animation
+            const duration = 6 + Math.random() * 7;
+            // Set transition properties
             triangle.style.transition = `all ${duration}s linear, transform ${duration}s ease-in-out, opacity ${duration}s linear`;
 
+            // Generate a random angle for the triangle's motion
+            const angle = Math.random() * 360;
+            // Calculate the ending coordinates
+            const endX = centerX + Math.cos(angle) * 1000;
+            const endY = centerY + Math.sin(angle) * 1000;
+
+            // Add a delay before the triangle appears
             setTimeout(() => {
-                triangle.style.left = `${endXPosition}px`;
-                triangle.style.top = `${endYPosition}px`; // используем endYPosition здесь
-                triangle.style.opacity = '0';
+                triangle.style.left = `${endX}px`;
+                triangle.style.top = `${endY}px`;
+                triangle.style.opacity = '1'; // Smooth appearance
                 triangle.style.transform = `rotate(${Math.random() * 360}deg)`;
             }, 100);
 
-            // Удаление треугольника, когда анимация завершена
+            // Remove the triangle when the animation is complete
             triangle.addEventListener('transitionend', function() {
                 trianglesContainer.removeChild(triangle);
             });
         }
     }
 
-    animateTriangles();  // Запускаем первый раз
+    // Call the animation function to start
+    animateTriangles();
 
-    // Запускаем анимацию каждые 4 секунды
+    // Set up a timer to repeat the animation every 4 seconds
     setInterval(animateTriangles, 4000);
 });

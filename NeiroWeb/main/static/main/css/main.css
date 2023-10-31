@@ -102,6 +102,64 @@ a {
     96% { content: "a"; }
     100% { content: ""; }
 }
+@keyframes typing_ru {
+    0% { content: ""; }
+    2% { content: "и"; }
+    4% { content: "и "; }
+    6% { content: "и И"; }
+    8% { content: "и Ис"; }
+    10% { content: "и Иск"; }
+    12% { content: "и Иску"; }
+    14% { content: "и Искус"; }
+    16% { content: "и Искусс"; }
+    18% { content: "и Искусст"; }
+    20% { content: "и Искусств"; }
+    22% { content: "и Искусстве"; }
+    24% { content: "и Искусствен"; }
+    26% { content: "и Искусственн"; }
+    28% { content: "и Искусственны"; }
+    30% { content: "и Искусственный"; }
+    32% { content: "и Искусственный "; }
+    34% { content: "и Искусственный И"; }
+    36% { content: "и Искусственный Ин"; }
+    38% { content: "и Искусственный Инт"; }
+    40% { content: "и Искусственный Инте"; }
+    42% { content: "и Искусственный Интел"; }
+    44% { content: "и Искусственный Интелл"; }
+    46% { content: "и Искусственный Интелле"; }
+    48% { content: "и Искусственный Интеллек"; }
+    50% { content: "и Искусственный Интеллект"; }
+    52% { content: "и Искусственный Интеллект"; }
+    54% { content: "и Искусственный Интеллект!"; }
+    70% { content: "и Искусственный Интеллект!"; }
+    71% { content: "и Искусственный Интеллект"; }
+    72% { content: "и Искусственный Интеллек"; }
+    73% { content: "и Искусственный Интелле"; }
+    74% { content: "и Искусственный Интелл"; }
+    75% { content: "и Искусственный Интел"; }
+    76% { content: "и Искусственный Инте"; }
+    77% { content: "и Искусственный Инт"; }
+    78% { content: "и Искусственный Ин"; }
+    79% { content: "и Искусственный И"; }
+    80% { content: "и Искусственный "; }
+    81% { content: "и Искусственный"; }
+    82% { content: "и Искусственны"; }
+    83% { content: "и Искусственн"; }
+    84% { content: "и Искусствен"; }
+    85% { content: "и Искусстве"; }
+    86% { content: "и Искусств"; }
+    87% { content: "и Искусст"; }
+    88% { content: "и Искусс"; }
+    89% { content: "и Искус"; }
+    90% { content: "и Иску"; }
+    91% { content: "и Иск"; }
+    92% { content: "и Ис"; }
+    93% { content: "и И"; }
+    94% { content: "и "; }
+    95% { content: "и"; }
+    96% { content: ""; }
+    100% { content: ""; }
+}
 @keyframes border_blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -112,6 +170,16 @@ a {
     animation: typing 12s infinite;
 }
 .ai_typing::after {
+    content: "";
+    border-right: 1px solid azure;
+    animation: border_blink 0.75s linear infinite;
+}
+.ai_typing_ru {}
+.ai_typing_ru::before {
+    content: "";
+    animation: typing_ru 12s infinite;
+}
+.ai_typing_ru::after {
     content: "";
     border-right: 1px solid azure;
     animation: border_blink 0.75s linear infinite;
@@ -197,11 +265,9 @@ a {
 }
 
 .triangle {
-    position: relative;
+    position: absolute;
     width: 0;
     height: 0;
-    transition: all 5s linear;
-    opacity: 1;
-    transform: rotate(0deg);
-    transition: all 5s linear, transform 5s ease-in-out;
+    transition: all 6s linear, transform 6s ease-in-out, opacity 6s linear;
+    opacity: 0;
 }

@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Neiro{% endblock %}
+{% block additional %}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+{% endblock %}
+
+{% block actionbar %}
+    <header class="actionbar">
+        <img id="logo" src="{% static 'main/img/Neiro.png' %}" alt="Neiro" width="75px" height="75px">
+        <a href="">Панель Управления</a>
+        <a href="">ЧАВО</a>
+        <a href="">Поддержка</a>
+        <a href="">↗Форум</a>
+    </header>
+{% endblock %}
+
+{% block background_effect %}
+<div id="triangles">
+    <script src="{% static 'main/js/trianglesfly.js' %}"></script>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="introduction">
+        <img id="logo_full" src="{% static 'main/img/Neiro_full.png' %}" alt="Neiro" width="300px" height="200px">
+        <h4 id="logo_desc">Мультифункциональный бот&nbsp;<span class="ai_typing_ru"></span></h4>
+        <div class="buttons">
+            <a id="dc_integr" href="https://discord.com/api/oauth2/authorize?client_id=1018204276855677061&permissions=8&scope=bot"><img src="{% static 'main/img/discord_logo.png' %}" alt="Discord" width="50px" height="50px">Добавить в Discord</a>
+            <a id="tg_integr" ><img src="{% static 'main/img/telegram_logo.png' %}" alt="Telegram" width="50px" height="50px">Добавить в Telegram</a>
+            <a id="vk_integr" ><img src="{% static 'main/img/vkontakte_logo.png' %}" alt="VKontakte" width="50px" height="50px">Добавить в VK</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <h1 id="ftm">Встречайте все функции Neiro!</h1>
+    </div>
+
+    <div class="blog_preview">
+
+    </div>
+{% endblock %}
