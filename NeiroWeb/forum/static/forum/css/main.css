@@ -35,3 +35,20 @@ a {
 .actionbar a:hover {
     color: azure;
 }
+#triangles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    transition: all 6s linear, transform 6s ease-in-out, opacity 6s linear;
+    opacity: 0;
+}

@@ -1,4 +1,3 @@
-// Script made with ChatGPT by OpenAI
 document.addEventListener("DOMContentLoaded", function() {
     // Get the triangles container element by ID
     const trianglesContainer = document.getElementById('triangles');
@@ -78,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Remove the triangle when the animation is complete
             triangle.addEventListener('transitionend', function() {
-                trianglesContainer.removeChild(triangle);
+                if (trianglesContainer.contains(triangle)) {
+                    trianglesContainer.removeChild(triangle);
+                }
             });
         }
     }
