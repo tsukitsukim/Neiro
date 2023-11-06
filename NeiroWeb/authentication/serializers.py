@@ -13,10 +13,11 @@ class UserSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=30)
     username = serializers.CharField(max_length=30)
 
+    def create(self, validated_data):
+        return User.objects.create(**validated_data)
 
-def encode():
-    model = UserModel('Plizik', 'lovestea')
-    model_sr = UserSerializer(model)
-    print(model_sr.data, type(model_sr.data), sep='\n')
-    json = JSONRenderer().render(model_sr.data)
-    print(json)
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("name", instance.name)
+        instance.username = validated_data.get("username", instance.username)
+        instance.save()
+        return instance
