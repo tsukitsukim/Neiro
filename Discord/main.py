@@ -17,5 +17,6 @@ async def on_ready():
     await client.tree.sync()
     print("Neiro is up and running.")
 
+
 if __name__ == '__main__':
     client.run('MTAxODIwNDI3Njg1NTY3NzA2MQ.GNHDVQ.Ms1wsVbFvdKpjS2CVOBFvj_IeE04WqgmmJvyp4')
