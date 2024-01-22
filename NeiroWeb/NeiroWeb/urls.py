@@ -22,6 +22,5 @@ urlpatterns = [
     path('', include('main.urls')),
     path('forum', include('forum.urls')),
     path('admin/', admin.site.urls),
-    path('api/v1/auth/', UserAPIList.as_view()),
-    path('api/v1/auth/<int:pk>/', UserAPIUpdate.as_view()),
+    path('api/v1/auth/register/', UserRegistrationAPIView.as_view()),
 ]

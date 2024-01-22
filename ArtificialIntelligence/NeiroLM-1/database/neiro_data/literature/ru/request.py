@@ -18,6 +18,8 @@ for i in range(1, maxbooknum):
         soup = bs4.BeautifulSoup(r.text, "html.parser")
 
         t = soup.find('div', class_='title')
+        b = t.findChildren("h1")
+        t = b[0]
         print(t)
         title = t.get_text()
         text.join(f"Title: {title}\n")

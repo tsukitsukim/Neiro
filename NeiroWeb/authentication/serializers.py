@@ -1,20 +1,20 @@
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
-from .models import User
+from .models import CustomUser
 
 
-class UserModel:
-    def __init__(self, name, username):
-        self.name = name
-        self.username = username
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
 
-
-class UserSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=30)
-    username = serializers.CharField(max_length=30)
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'name', 'username', 'avatar_img', 'banner_img', 'description', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        return User.objects.create(**validated_data)
+        user = CustomUser.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)

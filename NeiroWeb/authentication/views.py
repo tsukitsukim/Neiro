@@ -1,48 +1,21 @@
-from django.forms import model_to_dict
-from django.shortcuts import render
-from rest_framework import generics
-from rest_framework.views import *
+from rest_framework import generics, status
 from rest_framework.response import Response
 
-from .models import User
+from .models import CustomUser
 from .serializers import UserSerializer
 
 
-class UserAPIList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
+class UserRegistrationAPIView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
-
-class UserAPIUpdate(generics.UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-'''
-class UserAPIView(APIView):
-    def get(self, request):
-        w = User.objects.all()
-        return Response({'get': UserSerializer(w, many=True).data})
-
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'post': serializer.data})
-
-    def put(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method PUT is not allowed"})
-
-        try:
-            instance = User.objects.get(pk=pk)
-        except:
-            return Response({"error": "Account does not exist"})
-
-        serializer = UserSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({"post": serializer.data})
-'''
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            {'data': 'User was successfully registered.'},
+            status=status.HTTP_201_CREATED,
+            headers=headers
+        )
