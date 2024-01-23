@@ -28,7 +28,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center; /* Центрирование по горизонтали */
-    justify-content: center; /* Центрирование по вертикали */
+    justify-content: center;
 }
 
 .registration_window #logo {
