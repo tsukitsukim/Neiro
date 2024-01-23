@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    float: inherit;
+    width: auto;
+    font-family: 'Cascadia Code SemiBold';
+    font-weight: 500;
+    color: azure;
+}
+body {
+    background: #252525;
+}
+a {
+    color: azure;
+}
+.registration_window {
+    position: absolute;
+    border: 2px solid #830fd2;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #212121;
+    width: 50%;
+    max-width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование по горизонтали */
+    justify-content: center; /* Центрирование по вертикали */
+}
+
+.registration_window #logo {
+    margin-bottom: 20px;
+}
+
+.registration_window a {
+    text-decoration: none;
+    text-shadow: 2px 2px #830fd2;
+}
+
+.registration_window a:hover {
+    color: azure;
+}
+
+#triangles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    transition: all 6s linear, transform 6s ease-in-out, opacity 6s linear;
+    opacity: 0;
+}

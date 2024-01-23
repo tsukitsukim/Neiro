@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'forum',
-    'authentication.apps.AuthConfig',
+    'api.apps.AuthConfig',
     'rest_framework',
+    'authentication'
 ]
 
 MIDDLEWARE = [
